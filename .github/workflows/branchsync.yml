@@ -19,11 +19,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: wei/git-sync@v2
-
-    # Runs a single command using the runners shell
     - name: Sync two branches
+      uses: wei/git-sync@v2
       with:
         source_repo: "https://github.com/genericarati/github_action"
         source_branch: "branch-2"
