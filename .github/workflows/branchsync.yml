@@ -1,16 +1,24 @@
-name: sync_branch
+name: Sync
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+
 jobs:
-  sync_branches:
+  sync-branches:
     runs-on: ubuntu-latest
+    name: Syncing branches
     steps:
-    -  name: Sync two branches
-       uses: wei/git-sync@v2
-       with:
-         source_repo: "https://github.com/genericarati/github_action"
-         source_branch: "branch-2"
-         destination_repo: "https://github.com/genericarati/github_action"
-         destination_branch: "master"
-         ssh_private_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnlNB6C4SzNHC8u6kgIOxppLF/DqVIwGWj8DaSVnmbJSJ6GbVmDWr0DEPRpWJYJCpCYJ6c8u8LQezk0UkPe2hNF447bHd58uJvurZX9GmZQe5/q2916Ow7ui1afLYKzdEf87TDRkimAXHy/CcJYZmIVJzZgjKMwt8ZH4MMQA63i3augnzhaWvpVIfHGCN8CJaW60YN/fv2Rwb3Qdzz8QhnVrKoqKGA4CjQVmmw1EY1YEhrGPsbPzIqZFvoHWtuxa+U6Oac9VuS1yaFPJVM0e/QEU5eypNmvgsIA+0QPaWKhigEwHDXH0bsPd5JpL+3nR0pZM60uAudcdafFT/IbRSb aratijoshi@Aratis-MacBook-Pro.local
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Opening pull request
+        id: pull
+        uses: tretuna/sync-branches@1.1.0
+        with:
+          GITHUB_TOKEN: af3e19b37b7c310d15865f6d104a3e402e03b16b
+          FROM_BRANCH: "master"
+          TO_BRANCH: "branch-2"
